@@ -1,4 +1,4 @@
-package com.example.Entity;
+package com.mansi.test.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,15 +9,15 @@ import javax.persistence.Id;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
-@Entity
 public class ExamType {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="examtype_id",updatable = false,length = 1)
 	private int examtype_id;
+	
 	@NonNull
 	private String examtype_name;
+	
 	@Nullable
 	private String examtype_description;
 	public ExamType() {
@@ -53,6 +53,4 @@ public class ExamType {
 		return "ExamType [examtype_id=" + examtype_id + ", examtype_name=" + examtype_name + ", examtype_description="
 				+ examtype_description + "]";
 	}
-	
-	
 }

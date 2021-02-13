@@ -1,36 +1,131 @@
-package com.example.Entity;
+package com.mansi.test.entities;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.stereotype.Component;
 
 //@Component
 @Entity
 public class Student 
 {
+	@Id
+	@Column(length = 7,nullable = false)
+	@Size(max = 7)
 	private int grNo;
-	//foreign key of table standard
+	
+	//Add Constraint in below
+	private Standard standardId;
+	
+	@Column(length = 20,nullable = false)
+	@Size(max = 20)
+	@NotNull
 	private String firstName;
+	
+	@Column(length = 20,nullable = false)
+	@Size(max = 20)
+	@NotNull
 	private String middleName;
+	
+	@Column(length = 20,nullable = false)
+	@Size(max = 20)
+	@NotNull
 	private String lastName;
+	
+	@Column(length = 20,nullable = false)
+	@Size(max = 20)
+	@NotNull
 	private String motherName;
+	
+	@Column(length = 20,nullable = false)
+	@Size(max = 20)
+	@NotNull
 	private String fatherName;
+	
+	@Column(length = 2,nullable = false)
+	@Size(min = 1,max = 2)
+	@NotNull
 	private int rollNo;
+	
+	@Column(length = 10,nullable = false)
+	@Size(min = 4,max = 10)
+	@NotNull
 	private String division;
+	
+	@Column(nullable = false)
+	@NotNull
+	@Temporal(TemporalType.DATE)
 	private Date admissionDate;
+	
+	@Column(length = 7,nullable = false)
+	@Size(min = 4,max = 7)
+	@NotNull
 	private String stream;
+	
+	@Column(length = 8,nullable = false)
+	@Size(min = 7,max = 8)
+	@NotNull
 	private String medium;
+	
+	@Column(length = 10,nullable = false)
+	@Size(max = 10)
+	@NotNull
 	private String religion;
+	
+	@Column(length = 10,nullable = false)
+	@Size(max = 10)
+	@NotNull
 	private String subCaste;
+	
+	@Column(length = 5,nullable = false)
+	@Size(min = 2,max = 5)
+	@NotNull
 	private String category;
+	
+	@Column(length = 6,nullable = false)
+	@Size(min = 4,max = 6)
+	@NotNull
 	private String gender;
+	
+	@Column(nullable = false)
+	@NotNull
+	@Temporal(TemporalType.DATE)
 	private Date dateOfBirth;
+	
+	@Column(length = 3)
+	@Size(min = 2,max = 3)
 	private String bloodGroup;
+	
+	@Column(length = 100,nullable = false)
+	@Size(max = 100)
+	@NotNull
 	private String address1;
+	
+	@Column(length = 100,nullable = false)
+	@Size(max = 100)
+	@NotNull
 	private String address2;
+	
+	@Column(length = 6,nullable = false)
+	@Size(min = 6,max = 6)
+	@NotNull
 	private int pincode;
+	
+	@Column(length = 50)
+	@Size(max = 50)
 	private String previousSchoolName;
-	//add one column of photo of student
+	
+	@Column(length = 255,nullable = false)
+	@Size(max = 255)
+	@NotNull
+	private String image;
 	
 	//getters and setters
 	public int getGrNo() 
@@ -292,8 +387,14 @@ public class Student
 				+ ", address2=" + address2 + ", pincode=" + pincode + ", previousSchoolName=" + previousSchoolName
 				+ "]";
 	}
+
+	public Standard getStandardId() {
+		return standardId;
+	}
+
+	public void setStandardId(Standard standardId) {
+		this.standardId = standardId;
+	}
 	
 	
 }
-
-

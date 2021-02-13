@@ -1,37 +1,95 @@
-package com.example.Entity;
+package com.mansi.test.entities;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.stereotype.Component;
 
 //@Component
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"userName"}))
 public class Teacher 
 {
 	@Id
+	@Column(length = 2,nullable = false)
 	private int teacherId;
 	
-	//column is remaining of foreign key
-	//of normalized table teacher subject.
+	//add constraint in below
+	private TeacherSubject teacherSubjectId;
 	
-	//column is remaining of foreign key
-	//of normalized table teacher standard.
+	//add constraint in below
+	private TeacherStandard teacherStandardId;
 	
+	@Column(length = 20,nullable = false,unique = true)
+	@Size(min = 4,max = 20)
+	// i had defined unique constraint of this above in @Table notation.
+	@NotNull
 	private String userName;
+	
+	@Column(length = 15,nullable = false)
+	@Size(min = 8,max = 15)
+	@NotNull
 	private String password;
+	
+	@Column(length = 50,nullable = false)
+	@Size(max = 50)
+	@NotNull
 	private String teacherName;
+	
+	@Column(length = 6,nullable = false)
+	@Size(min = 4,max = 6)
+	@NotNull
 	private String gender;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(nullable = false)
+	@NotNull
 	private Date joiningDate;
+	
+	@Column(length = 40,nullable = false)
+	@Size(max = 40)
+	@NotNull
 	private String qualification;
+	
+	@Column(length = 40,nullable = false)
+	@Size(max = 40)
+	@NotNull
 	private String emailId;
+	
+	@Column(length = 10,nullable = false)
+	@Size(min = 10,max = 10)
+	@NotNull
 	private String contactno;
+	
+	@Column(length = 100,nullable = false)
+	@Size(max = 100)
+	@NotNull
 	private String address1;
+	
+	@Column(length = 100,nullable = false)
+	@Size(max = 100)
+	@NotNull
 	private String address2;
+	
+	@Column(length = 6,nullable = false)
+	@Size(min = 6,max = 6)
+	@NotNull
 	private int pincode;
 	
-	//create column of storing path of image 
-	
+	//create column of storing path of image
+	@Column(length = 255,nullable = false)
+	@Size(max = 255)
+	@NotNull
+	private String image;
 	
 	//getters and setters
 	public int getTeacherId() 
@@ -189,6 +247,7 @@ public class Teacher
 				+ ", qualification=" + qualification + ", emailId=" + emailId + ", contactno=" + contactno
 				+ ", address1=" + address1 + ", address2=" + address2 + ", pincode=" + pincode + "]";
 	}
-		
+	
+	
+	
 }
-
