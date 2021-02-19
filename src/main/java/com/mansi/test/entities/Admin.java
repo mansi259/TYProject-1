@@ -21,7 +21,7 @@ import javax.validation.constraints.Size;
 @Entity
 public class Admin 
 {	
-	//all constraints and annotations are remaining
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(length = 1,nullable = false)

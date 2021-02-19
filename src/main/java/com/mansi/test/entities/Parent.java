@@ -1,16 +1,18 @@
 package com.mansi.test.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import org.springframework.stereotype.Component;
 
 //@Component
 @Entity
@@ -23,7 +25,12 @@ public class Parent
 	private int parentId;
 	
 	//add constraint in below 
-	private ParentStudent parentStudentId;
+//	@OneToMany
+//	private List<ParentStudent> parentStudentId;
+	
+	//add
+	@OneToMany(mappedBy = "parentId",fetch = FetchType.LAZY)
+	private List<Student> grNo;
 	
 	@Column(length = 1,nullable = false)
 	@Size(min = 1,max = 1)
@@ -166,12 +173,23 @@ public class Parent
 	{
 		this.occupation = occupation;
 	}
-	
-	//parameterized constructor
-	public Parent(int parentId, int noOfChild, String userName, String password, String parentName, String emailId,
-			String contactNo1, String contactNo2, String qualification, String occupation) {
+
+	public List<Student> getGrNo() {
+		return grNo;
+	}
+
+	public void setGrNo(List<Student> grNo) {
+		this.grNo = grNo;
+	}
+
+	public Parent(int parentId, List<Student> grNo, @Size(min = 1, max = 1) @NotNull int noOfChild,
+			@Size(min = 4, max = 20) String userName, @NotNull @Size(min = 8, max = 15) String password,
+			@Size(max = 50) @NotNull String parentName, @Size(max = 40) String emailId,
+			@Size(min = 10, max = 10) @NotNull String contactNo1, @Size(min = 10, max = 10) String contactNo2,
+			@Size(max = 20) @NotNull String qualification, @Size(max = 15) @NotNull String occupation) {
 		super();
 		this.parentId = parentId;
+		this.grNo = grNo;
 		this.noOfChild = noOfChild;
 		this.userName = userName;
 		this.password = password;
@@ -182,23 +200,23 @@ public class Parent
 		this.qualification = qualification;
 		this.occupation = occupation;
 	}
-	
-	//default Constructor
-	public Parent() 
-	{
+
+	public Parent() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	//toString Method
+
 	@Override
-	public String toString() 
-	{
-		return "Parent [parentId=" + parentId + ", noOfChild=" + noOfChild + ", userName=" + userName + ", password="
-				+ password + ", parentName=" + parentName + ", emailId=" + emailId + ", contactNo1=" + contactNo1
-				+ ", contactNo2=" + contactNo2 + ", qualification=" + qualification + ", occupation=" + occupation
-				+ "]";
+	public String toString() {
+		return "Parent [parentId=" + parentId + ", grNo=" + grNo + ", noOfChild=" + noOfChild + ", userName=" + userName
+				+ ", password=" + password + ", parentName=" + parentName + ", emailId=" + emailId + ", contactNo1="
+				+ contactNo1 + ", contactNo2=" + contactNo2 + ", qualification=" + qualification + ", occupation="
+				+ occupation + "]";
 	}
+
+	
+	
+	
 	
 	
 }

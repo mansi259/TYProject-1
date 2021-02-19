@@ -1,13 +1,16 @@
 package com.mansi.test.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import javax.validation.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -27,7 +30,8 @@ public class Login
 	private int loginId;
 	
 	//remaining to add constraints
-	private UserType usertypeId;
+	@OneToMany(fetch = FetchType.LAZY)
+	private List<UserType> usertypeId;
 	
 	@NotNull
 	@Size(min = 4 , max = 20)
@@ -71,30 +75,38 @@ public class Login
 		this.password = password;
 	}
 
+	public List<UserType> getUsertypeId() {
+		return usertypeId;
+	}
+
+	public void setUsertypeId(List<UserType> usertypeId) {
+		this.usertypeId = usertypeId;
+	}
+
 	//parameterized constructor
-	public Login(int loginId, String username, String password) 
-	{
+	public Login(int loginId, List<UserType> usertypeId, @NotNull @Size(min = 4, max = 20) String username,
+			@NotNull @Size(min = 8, max = 15) String password) {
 		super();
 		this.loginId = loginId;
+		this.usertypeId = usertypeId;
 		this.username = username;
 		this.password = password;
 	}
 
-	//default constructor
-	public Login() 
-	{
+	//super Constructor
+	public Login() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	//to string method
+	//toString method
 	@Override
-	public String toString() 
-	{
-		return "Login [loginId=" + loginId + ", username=" + username + ", password=" + password + "]";
-	} 
-	
+	public String toString() {
+		return "Login [loginId=" + loginId + ", usertypeId=" + usertypeId + ", username=" + username + ", password="
+				+ password + "]";
+	}
 
+	
 	
 	
 	
