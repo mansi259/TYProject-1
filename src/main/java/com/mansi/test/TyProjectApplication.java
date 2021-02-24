@@ -1,13 +1,8 @@
 package com.mansi.test;
 
-import java.util.List;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-
-import com.mansi.test.entities.UserType;
-import com.mansi.test.repository.UserTypeRepository;
 
 @SpringBootApplication
 public class TyProjectApplication {
@@ -16,7 +11,7 @@ public class TyProjectApplication {
 		//application cotext
 		ApplicationContext context = SpringApplication.run(TyProjectApplication.class, args);
 		//get bean of user repository (help to save and other functionality for database)
-		UserTypeRepository userrepo= context.getBean(UserTypeRepository.class);
+		//UserTypeRepository userrepo= context.getBean(UserTypeRepository.class);
 		
 //		//below all for just my satisfaction we can do this manually by going into mysql table.
 //		//create object of usertype()

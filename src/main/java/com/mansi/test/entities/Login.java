@@ -26,22 +26,22 @@ public class Login
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(length = 4,nullable = false)
+	@Column(length = 4,updatable = false)
 	private int loginId;
 	
-	//remaining to add constraints
-	@OneToMany(fetch = FetchType.LAZY)
-	private List<UserType> usertypeId;
+	
+	@OneToMany(mappedBy = "login",fetch = FetchType.LAZY)
+	private List<UserType> usertype;
 	
 	@NotNull
-	@Size(min = 4 , max = 20)
+	@Size(max = 20)
 	@Column(length = 20,unique = true,nullable = false)
 	//unique constraint is above in @Table annotation
 	private String username;
 	
-	@Column(length = 15,nullable = false)
 	@NotNull
 	@Size(min = 8,max = 15)
+	@Column(length = 15,nullable = false)
 	private String password;
 
 	//getters and setters
@@ -75,23 +75,16 @@ public class Login
 		this.password = password;
 	}
 
-	public List<UserType> getUsertypeId() {
-		return usertypeId;
+	public List<UserType> getUsertype() {
+		return usertype;
 	}
 
-	public void setUsertypeId(List<UserType> usertypeId) {
-		this.usertypeId = usertypeId;
+	public void setUsertype(List<UserType> usertype) {
+		this.usertype = usertype;
 	}
 
 	//parameterized constructor
-	public Login(int loginId, List<UserType> usertypeId, @NotNull @Size(min = 4, max = 20) String username,
-			@NotNull @Size(min = 8, max = 15) String password) {
-		super();
-		this.loginId = loginId;
-		this.usertypeId = usertypeId;
-		this.username = username;
-		this.password = password;
-	}
+	
 
 	//super Constructor
 	public Login() {
@@ -99,10 +92,19 @@ public class Login
 		// TODO Auto-generated constructor stub
 	}
 
+	public Login(int loginId, List<UserType> usertype, @NotNull @Size(max = 20) String username,
+			@NotNull @Size(min = 8, max = 15) String password) {
+		super();
+		this.loginId = loginId;
+		this.usertype = usertype;
+		this.username = username;
+		this.password = password;
+	}
+
 	//toString method
 	@Override
 	public String toString() {
-		return "Login [loginId=" + loginId + ", usertypeId=" + usertypeId + ", username=" + username + ", password="
+		return "Login [loginId=" + loginId + ", usertype=" + usertype + ", username=" + username + ", password="
 				+ password + "]";
 	}
 

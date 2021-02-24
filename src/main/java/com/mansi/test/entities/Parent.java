@@ -2,6 +2,7 @@ package com.mansi.test.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,59 +21,58 @@ import javax.validation.constraints.Size;
 public class Parent 
 {
 	@Id
-	@Column(length = 4 , nullable = false)
+	@Column(length = 4 , updatable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int parentId;
 	
-	//add constraint in below 
-//	@OneToMany
-//	private List<ParentStudent> parentStudentId;
 	
-	//add
-	@OneToMany(mappedBy = "parentId",fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "parent",fetch = FetchType.LAZY)
 	private List<Student> grNo;
 	
-	@Column(length = 1,nullable = false)
-	@Size(min = 1,max = 1)
+	@OneToMany(mappedBy = "parent",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	private List<Query> query;
+	
 	@NotNull
+	@Size(max = 1)
+	@Column(length = 1,nullable = false)
 	private int noOfChild;
 	
+	@Size(max = 20)
 	@Column(length = 20,nullable = false,unique = true)
-	@Size(min = 4,max = 20)
 	//unique constraint of this is defined above in @table annotation
 	private String userName;
 	
-	@Column(length = 15,nullable = false)
 	@NotNull
 	@Size(min = 8,max = 15)
+	@Column(length = 15,nullable = false)
 	private String password;
 	
-	@Column(length = 50,nullable = false)
-	@Size(max = 50)
 	@NotNull
+	@Size(max = 50)
+	@Column(length = 50,nullable = false)
 	private String parentName;
 	
-	@Column(length = 40)
 	@Size(max = 40)
+	@Column(length = 40)
 	private String emailId;
 	
-	@Column(length = 10,nullable = false)
-	@Size(min = 10,max = 10)
 	@NotNull
+	@Size(max = 10)
+	@Column(length = 10,nullable = false)
 	private String contactNo1;
 	
+	@Size(max = 10)
 	@Column(length = 10)
-	@Size(min = 10,max = 10)
 	private String contactNo2;
 	
-	@Column(length = 20,nullable = false)
-	@Size(max = 20)
 	@NotNull
+	@Size(max = 20)
+	@Column(length = 20,nullable = false)
 	private String qualification;
 	
-	@Column(length = 15,nullable = false)
-	@Size(max = 15)
 	@NotNull
+	@Size(max = 15)
+	@Column(length = 15,nullable = false)
 	private String occupation;
 	
 	//getters and setters

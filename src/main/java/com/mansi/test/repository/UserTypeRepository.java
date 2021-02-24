@@ -1,11 +1,11 @@
 package com.mansi.test.repository;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Service;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.stereotype.Repository;
 
 import com.mansi.test.entities.UserType;
 
-@Service
-public interface UserTypeRepository extends CrudRepository<UserType, Integer>{
+@Repository
+public interface UserTypeRepository extends PagingAndSortingRepository<UserType, Integer>{
 
 }

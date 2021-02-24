@@ -21,31 +21,29 @@ import javax.validation.constraints.Size;
 @Entity
 public class Admin 
 {	
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(length = 1,nullable = false)
+	@Column(length = 1,updatable = false)
 	private int adminId;
 	
-	
-	@Column(length = 20,nullable = false,unique = true)
 	@NotNull
-	@Size(min = 4 ,max = 20)
+	@Size(max = 20)
+	@Column(length = 20,nullable = false,unique = true)
 	private String username;
 	
-	@Column(length = 15,nullable = false)
 	@NotNull
 	@Size(min = 8,max = 15)
+	@Column(length = 15,nullable = false)
 	private String password;
 	
-	@Column(length = 50,nullable = false)
 	@NotNull
 	@Size(max = 50)
+	@Column(length = 50,nullable = false)
 	private String adminName;
 	
-	@Column(length = 10,nullable = false)
 	@NotNull
-	@Size(min = 10,max = 10)
+	@Size(max = 10)
+	@Column(length = 10,nullable = false)
 	private String contactNo;
 	
 	@Column(length = 40,nullable = false)
@@ -53,35 +51,35 @@ public class Admin
 	@Size(max = 40)
 	private String emailId;
 	
-	@Column(length = 6,nullable = false)
-	@Size(max = 6 , min = 4)
 	@NotNull
+	@Size(max = 6)
+	@Column(length = 6,nullable = false)
 	private String gender;
 	
-	@Column(length = 100,nullable = false)
 	@NotNull
 	@Size(max = 100)
+	@Column(length = 100,nullable = false)
 	private String address1;
 	
-	@Column(length = 100,nullable = false)
 	@NotNull
 	@Size(max=100)
+	@Column(length = 100,nullable = false)
 	private String address2;
 	
-	@Column(length = 6,nullable = false)
 	@NotNull
-	@Size(min = 6,max = 6)
+	@Size(max = 6)
+	@Column(length = 6,nullable = false)
 	private int pincode;
 	
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
-	@NotNull
 	private Date joiningDate;
 	
 	//i have change constraint of below field
-	@Column(length = 255,nullable = false)
-	@Size(max = 255)
 	@NotNull
+	@Size(max = 255)
+	@Column(length = 255,nullable = false)
 	private String image;
 	
 	//getters and setters

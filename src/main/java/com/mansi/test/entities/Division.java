@@ -2,10 +2,14 @@ package com.mansi.test.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -17,87 +21,87 @@ import org.springframework.stereotype.Component;
 public class Division 
 {
 	@Id
-	@Column(length = 2,nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(length = 2,updatable = false)
 	private int divisionId;
 	
 	//add remaining Constraint 
-	@OneToMany(fetch = FetchType.LAZY)
-	private List<Standard> standardId;
+	@ManyToMany(mappedBy = "division" ,fetch = FetchType.LAZY)
+	private List<Standard> standard;
 	
-	@Column(length = 10,nullable = false)
-	@Size(min = 4,max = 10)
+	@OneToMany(mappedBy = "division" ,fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	private List<Result> result;
+	
 	@NotNull
+	@Size(max = 10)
+	@Column(length = 10,nullable = false)
 	private String divisionName;
 	
-	
-	@Column(length = 255,nullable = false)
-	@Size(max = 255)
 	@NotNull
+	@Size(max = 255)
+	@Column(length = 255,nullable = false)
 	private String resultFile;
 
-	
-	public int getDivisionId() 
-	{
+	public int getDivisionId() {
 		return divisionId;
 	}
 
-	public void setDivisionId(int divisionId)
-	{
+	public void setDivisionId(int divisionId) {
 		this.divisionId = divisionId;
 	}
 
-	public String getDivisionName() 
-	{
+	public List<Standard> getStandard() {
+		return standard;
+	}
+
+	public void setStandard(List<Standard> standard) {
+		this.standard = standard;
+	}
+
+	public List<Result> getResult() {
+		return result;
+	}
+
+	public void setResult(List<Result> result) {
+		this.result = result;
+	}
+
+	public String getDivisionName() {
 		return divisionName;
 	}
 
-	public void setDivisionName(String divisionName) 
-	{
+	public void setDivisionName(String divisionName) {
 		this.divisionName = divisionName;
 	}
 
-	public String getResultFile() 
-	{
+	public String getResultFile() {
 		return resultFile;
 	}
 
-	public void setResultFile(String resultFile)
-	{
+	public void setResultFile(String resultFile) {
 		this.resultFile = resultFile;
 	}
 
-	public List<Standard> getStandardId() {
-		return standardId;
-	}
-
-	public void setStandardId(List<Standard> standardId) {
-		this.standardId = standardId;
-	}
-
-	//constructor
-	public Division(int divisionId, List<Standard> standardId, @Size(min = 4, max = 10) @NotNull String divisionName,
-			@Size(max = 255) @NotNull String resultFile) {
+	public Division(int divisionId, List<Standard> standard, List<Result> result,
+			@NotNull @Size(max = 10) String divisionName, @NotNull @Size(max = 255) String resultFile) {
 		super();
 		this.divisionId = divisionId;
-		this.standardId = standardId;
+		this.standard = standard;
+		this.result = result;
 		this.divisionName = divisionName;
 		this.resultFile = resultFile;
 	}
 
-	//super constructor
 	public Division() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	//tostring override
 	@Override
 	public String toString() {
-		return "Division [divisionId=" + divisionId + ", standardId=" + standardId + ", divisionName=" + divisionName
-				+ ", resultFile=" + resultFile + "]";
+		return "Division [divisionId=" + divisionId + ", standard=" + standard + ", result=" + result
+				+ ", divisionName=" + divisionName + ", resultFile=" + resultFile + "]";
 	}
-	
-	
-	
+
 	
 }
